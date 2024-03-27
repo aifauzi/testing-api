@@ -23,19 +23,25 @@ def getMain():
 # almat untuk ambil data pesan statis 'hello'
 @app.get('/hello')
 def getHello(request: Request):
-    response = Response(content="Hello")
-    # define header response
-    response.headers["custom-header"] = "Ini custom header"
     
     # mengakses header dari request
-    '''headers = request.headers'''
+    headers = request.headers
 
     # return berbentuk json/dict
-    return response
-'''{
+    return {
         "message": "hello",
         "request_header": headers.get("user-agent")
-    }'''
+    }
+
+# alamat contoh untuk melihat hasil response
+@app.get('/hai')
+def getHai(request: Request):
+    response = Response(content="Hai")
+    
+    # define header response
+    response.headers["custom-header"] = "Ini custom header"
+
+    return response
 
 # alamat yang hanya bisa diakses dengan API Key
 @app.get('/secret')
